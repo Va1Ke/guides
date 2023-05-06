@@ -1,8 +1,18 @@
 FROM ubuntu:20.04
 
+EXPOSE 26656
+EXPOSE 26657
+EXPOSE 9091
+EXPOSE 9090
+EXPOSE 6060
+EXPOSE 1317
+
 # Copying other directories in docker container
 
 COPY . .
+
+RUN useradd -r validator
+USER validator
 
 RUN apt-get update
 
@@ -20,6 +30,7 @@ RUN apt install -y tmux
 RUN sudo apt update && sudo apt upgrade -y
 
 RUN sudo apt install make build-essential gcc git
+
 
 
 ## Installing Go
@@ -50,6 +61,8 @@ RUN curl -L https://github.com/CascadiaFoundation/cascadia/releases/download/v0.
 RUN sudo chmod u+x cascadiad
 
 RUN sudo cp cascadiad /usr/local/bin/cascadiad
+
+RUN sudo chown validator /usr/local/bin/cascadiad
 
 # For Other Steps Read Readme.md
 
