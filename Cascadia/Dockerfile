@@ -7,9 +7,8 @@ EXPOSE 9090
 EXPOSE 6060
 EXPOSE 1317
 
-# Copying other directories in docker container
-
-COPY . .
+RUN apt-get update && \
+      apt-get -y install sudo
 
 RUN useradd -r validator
 USER validator
@@ -24,7 +23,7 @@ RUN apt-get install -y curl
 RUN apt install -y nano
 
 RUN apt install -y tmux
-
+RUN apt install wget
 # Installing Node
 
 RUN sudo apt update && sudo apt upgrade -y

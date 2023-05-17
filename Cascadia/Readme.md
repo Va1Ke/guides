@@ -37,13 +37,13 @@ wget https://raw.githubusercontent.com/Va1Ke/guides/main/Cascadia/Dockerfile
 ```
 ### Building  Image
 ```
-docker build --tag 'cascadia' -p 26656:26656 -p 26657:26657 -p 9091:9091 -p 9090:9090 -p 6060:6060 -p 1317:1317
+docker build -t "cascadia:Dockerfile" .
 ```
 ### Сontinue Setting Up Under Docker
 * All other commands we will be using inside our docker container so <br> we need first use: ```docker exec -it id_container bash```.
 #### Setting moniker 
 ```
-docker exec -it id_container bash
+docker run -p 26656:26656 -p 26657:26657 -p 9091:9091 -p 9090:9090 -p 6060:6060 -p 1317:1317 -it cascadia:Dockerfile bash
 cascadiad init [moniker] --chain-id cascadia_6102-1
 ```
 * [moniker] - name of your node 
